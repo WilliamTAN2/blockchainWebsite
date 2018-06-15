@@ -8,6 +8,8 @@
 <header>Crêpes bretonnes</header>
     <nav>
        {% block nav %}
+        {% load static %}
+        <img src="{% static 'blog/crepes.jpg' %}" alt="Mon image" />
        <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/blog/">Blog</a></li>

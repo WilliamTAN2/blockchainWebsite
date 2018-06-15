@@ -5,10 +5,7 @@ from datetime import datetime
 
 def home(request):
     """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
-    return HttpResponse("""
-        <h1>Bienvenue sur mon blog !</h1>
-        <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
-    """)
+    return render(request, 'blog/accueil.html')
 
 def view_article(request, id_article):
     if id_article > 100:
