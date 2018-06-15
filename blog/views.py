@@ -2,10 +2,16 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.shortcuts import redirect
 from datetime import datetime
+from django.shortcuts import render, get_object_or_404
+from blog.models import Article
 
 def home(request):
-    """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
-    return render(request, 'blog/accueil.html')
+    articles = Article.objects.all() # Nous sélectionnons tous nos articles
+    return render(request, 'blog/accueil.html', {'derniers_articles': articles})
+
+def lire(request, id, slug):
+    article = get_object_or_404(Article, id=id, slug=slug)
+    return render(request, 'blog/lire.html', {'article':article})
 
 def view_article(request, id_article):
     if id_article > 100:
