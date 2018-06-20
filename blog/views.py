@@ -4,6 +4,52 @@ from django.shortcuts import redirect
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
+from .forms import ContactForm, ArticleForm
+
+def creerarticle(request):
+    # Construire le formulaire, soit avec les données postées,
+    # soit vide si l'utilisateur accède pour la première fois
+    # à la page.
+    form = ArticleForm(request.POST or None)
+    # Nous vérifions que les données envoyées sont valides
+    # Cette méthode renvoie False s'il n'y a pas de données
+    # dans le formulaire ou qu'il contient des erreurs.
+    if form.is_valid():
+        # Ici nous pouvons traiter les données du formulaire
+        titre = form.cleaned_data['titre']
+        auteur = form.cleaned_data['auteur']
+        slug = form.cleaned_data['slug']
+        contenu = form.cleaned_data['contenu']
+        categorie = form.cleaned_data['categorie']
+
+        # Nous pourrions ici envoyer l'e-mail grâce aux données
+        # que nous venons de récupérer
+        envoi = True
+
+    # Quoiqu'il arrive, on affiche la page du formulaire.
+    return render(request, 'blog/creerarticle.html', locals())
+
+def contact(request):
+    # Construire le formulaire, soit avec les données postées,
+    # soit vide si l'utilisateur accède pour la première fois
+    # à la page.
+    form = ContactForm(request.POST or None)
+    # Nous vérifions que les données envoyées sont valides
+    # Cette méthode renvoie False s'il n'y a pas de données
+    # dans le formulaire ou qu'il contient des erreurs.
+    if form.is_valid():
+        # Ici nous pouvons traiter les données du formulaire
+        sujet = form.cleaned_data['sujet']
+        message = form.cleaned_data['message']
+        envoyeur = form.cleaned_data['envoyeur']
+        renvoi = form.cleaned_data['renvoi']
+
+        # Nous pourrions ici envoyer l'e-mail grâce aux données
+        # que nous venons de récupérer
+        envoi = True
+
+    # Quoiqu'il arrive, on affiche la page du formulaire.
+    return render(request, 'blog/contact.html', locals())
 
 def home(request):
     articles = Article.objects.all() # Nous sélectionnons tous nos articles

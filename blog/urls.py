@@ -9,4 +9,6 @@ urlpatterns = [
     path('redirection', views.view_redirection),
     path('date', views.date_actuelle),
     path('addition/<int:nombre1>/<int:nombre2>/', views.addition),
+    path('contact/', views.contact, name='contact'),
+    path('creerarticle/', views.creerarticle, name='creationarticle'),
 ]
