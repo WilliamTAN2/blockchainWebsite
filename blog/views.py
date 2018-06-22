@@ -5,7 +5,11 @@ from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
 from .forms import ContactForm, ArticleForm, ScriptForm
-from testpython import *
+from bitcointransaction import *
+
+def bitcointransaction(request):
+    blockhash = getblockhashfromheight("100000")
+    return render(request, 'blog/bitcointransaction.html', locals())
 
 def script(request):
 
