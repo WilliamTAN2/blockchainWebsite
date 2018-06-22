@@ -4,7 +4,25 @@ from django.shortcuts import redirect
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
-from .forms import ContactForm, ArticleForm
+from .forms import ContactForm, ArticleForm, ScriptForm
+from testpython import *
+
+def script(request):
+
+    form = ScriptForm(request.POST or None)
+
+    if form.is_valid():
+        hauteur = form.cleaned_data['hauteur']
+        file = open("testfile.txt","w+")
+        file.write("blockheight " + str(hauteur) + "\n")
+        file.close()
+
+        ecriture = True
+    return render(request, 'blog/script.html', locals())
+
+def testpython(request):
+    hauteur = askheight()
+    return render(request, 'blog/testpython.html', locals())
 
 def creerarticle(request):
     # Construire le formulaire, soit avec les données postées,

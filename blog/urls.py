@@ -11,4 +11,6 @@ urlpatterns = [
     path('addition/<int:nombre1>/<int:nombre2>/', views.addition),
     path('contact/', views.contact, name='contact'),
     path('creerarticle/', views.creerarticle, name='creationarticle'),
+    path('script/', views.script, name='script'),
+    path('testpython/', views.testpython, name='testpython'),
 ]

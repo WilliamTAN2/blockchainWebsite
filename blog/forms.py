@@ -11,3 +11,6 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
+
+class ScriptForm(forms.Form):
+    hauteur = forms.DecimalField(max_digits=7, decimal_places=0)
