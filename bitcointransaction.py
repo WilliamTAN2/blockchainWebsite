@@ -27,10 +27,6 @@ def getlistoftransactionidfromblock(block):
     for transactionids in jsonblock['tx']:
         listoftransactionid.append(transactionids)
 
-    #For test only
-    for transaction in enumerate(listoftransactionid):
-        print(transaction)
-
     return listoftransactionid
 
 #Ask the transaction needing to be looked into//////////////
@@ -53,8 +49,6 @@ def getVoutaddresses(decodedtransaction):
     #Getting the addresses output from vout
     for i in range(0, len(jsontransaction["vout"])):
         listofvoutaddresses.append(jsontransaction["vout"][i]["scriptPubKey"]["addresses"])
-    print("list of output wallets :")
-    print(listofvoutaddresses)
     return listofvoutaddresses
 
 
@@ -82,6 +76,4 @@ def getVinaddresses(decodedtransaction):
     for j in range(0, len(jsontransaction["vin"])):
         listofvinposition.append(jsontransaction["vin"][j]["vout"])
         listofvinaddresses.append(getVinaddress(listofvintransaction[j],listofvinposition[j]))
-    print("list of Input wallets :")
-    print(listofvinaddresses)
     return listofvinaddresses

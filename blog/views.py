@@ -8,7 +8,22 @@ from .forms import ContactForm, ArticleForm, ScriptForm
 from bitcointransaction import *
 
 def bitcointransaction(request):
+    listoftransactionid = [] #list storing the transaction ids
+    listofvoutaddresses = [] #list of addresses of the output
+    listofvinaddresses = [] #list of addresses of the input of the current transaction
+
     blockhash = getblockhashfromheight("100000")
+    block = getblockfromblockhash(blockhash)
+    listoftransactionid = getlistoftransactionidfromblock(block)
+    print(listoftransactionid)
+
+    rawtransaction = getrawtransactionfromtransactionid("e9a66845e05d5abc0ad04ec80f774a7e585c6e8db975962d069a522137b80c1d")
+    decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
+    listofvoutaddresses = getVoutaddresses(decodedtransaction)
+    listofvinaddresses = getVinaddresses(decodedtransaction)
+    print(listofvoutaddresses)
+    print(listofvinaddresses)
+
     return render(request, 'blog/bitcointransaction.html', locals())
 
 def script(request):
