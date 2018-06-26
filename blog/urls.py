@@ -13,5 +13,6 @@ urlpatterns = [
     path('creerarticle/', views.creerarticle, name='creationarticle'),
     path('script/', views.script, name='script'),
     path('testpython/', views.testpython, name='testpython'),
-    path('bitcointransaction/', views.bitcointransaction, name='bitcointransaction'),
+    path('bitcointransaction/', views.listoftransactionid, name='listoftransactionid'),
+    path('bitcointransaction/<slug:txid>', views.listofinputsandoutputs, name='listofinputsandoutputs'),
 ]
