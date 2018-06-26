@@ -1,0 +1,31 @@
+<center>
+
+<table>
+    <br>
+    <br>
+
+    <tr>
+       <th>Inputs</th>
+   </tr>
+
+    {% for i in listofvinaddresses %}
+        <tr>
+            <td> {{i}} </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<table>
+   <tr>
+       <th>Outputs</th>
+   </tr>
+
+    {% for i in listofvoutaddresses %}
+        <tr>
+            <td> {{i}} </td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+</center>
