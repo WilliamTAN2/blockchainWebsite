@@ -13,4 +13,8 @@ class ArticleForm(forms.ModelForm):
         fields = '__all__'
 
 class ScriptForm(forms.Form):
-    hauteur = forms.DecimalField(max_digits=7, decimal_places=0)
+    height = forms.DecimalField(max_digits=7, decimal_places=0)
+
+class TestUrlForm(forms.Form):
+    sujet = forms.CharField(max_length=100)
+    verbe = forms.CharField(max_length=100)

@@ -1,26 +1,33 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
-from .forms import ContactForm, ArticleForm, ScriptForm
+from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
 from bitcointransaction import *
 
-def listoftransactionid(request):
+def askheight(request):
+    form=ScriptForm(request.POST or None)
+    if form.is_valid():
+        # Ici nous pouvons traiter les données du formulaire
+        height = form.cleaned_data['height']
+        return HttpResponseRedirect(reverse('bitcoin', args=(height,)))
+    else:
+        return render(request, 'blog/askheight.html', locals())
+
+def listoftransactionid(request, height):
     listoftransactionid = [] #list storing the transaction ids
     listofvoutaddresses = [] #list of addresses of the output
     listofvinaddresses = [] #list of addresses of the input of the current transaction
 
-    form=ScriptForm(request.POST or None)
+    blockhash = getblockhashfromheight(height)
+    block = getblockfromblockhash(blockhash)
+    listoftransactionid = getlistoftransactionidfromblock(block)
+    print(listoftransactionid)
 
-    if form.is_valid():
-        blockhash = getblockhashfromheight(form.cleaned_data['hauteur'])
-        block = getblockfromblockhash(blockhash)
-        listoftransactionid = getlistoftransactionidfromblock(block)
-        print(listoftransactionid)
-
-    return render(request, 'blog/bitcointransaction.html', locals())
+    return render(request, 'blog/listoftransactionid.html', locals())
 
 
 def listofinputsandouputs(request,txid):
@@ -32,6 +39,20 @@ def listofinputsandouputs(request,txid):
     print(listofvinaddresses)
 
     return render(request, 'blog/bitcointransaction.html', locals())
+
+def testurl(request):
+
+    form = TestUrlForm(request.POST or None)
+    if form.is_valid():
+        # Ici nous pouvons traiter les données du formulaire
+        sujet = form.cleaned_data['sujet']
+        verbe = form.cleaned_data['verbe']
+        return HttpResponseRedirect(reverse('testurlwithvariables', args=(sujet,verbe,)))
+    else:
+        return render(request, 'blog/testurl.html', locals())
+
+def testurlwithvariables(request, sujet, verbe):
+    return render(request, 'blog/testurlwithvariables.html', locals())
 
 def script(request):
 
