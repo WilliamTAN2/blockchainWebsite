@@ -23,7 +23,7 @@ def listoftransactionid(request):
     return render(request, 'blog/bitcointransaction.html', locals())
 
 
-def listofinputsandouputs(request,txid)
+def listofinputsandouputs(request,txid):
     rawtransaction = getrawtransactionfromtransactionid(txid)
     decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
     listofvoutaddresses = getVoutaddresses(decodedtransaction)
