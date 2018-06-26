@@ -13,7 +13,7 @@ def askheight(request):
     if form.is_valid():
         # Ici nous pouvons traiter les données du formulaire
         height = form.cleaned_data['height']
-        return HttpResponseRedirect(reverse('bitcoin', args=(height,)))
+        return HttpResponseRedirect(reverse('listofinputsandoutputs', args=(height,)))
     else:
         return render(request, 'blog/askheight.html', locals())
 
