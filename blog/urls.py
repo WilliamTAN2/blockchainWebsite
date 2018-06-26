@@ -14,5 +14,5 @@ urlpatterns = [
     path('script/', views.script, name='script'),
     path('testpython/', views.testpython, name='testpython'),
     path('bitcointransaction/', views.listoftransactionid, name='listoftransactionid'),
-    path('bitcointransaction/<slug:txid>', views.listofinputsandoutputs, name='listofinputsandoutputs'),
+    path('bitcointransaction/<slug:txid>', views.listofinputsandouputs, name='listofinputsandoutputs'),
 ]
