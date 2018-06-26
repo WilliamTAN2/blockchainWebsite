@@ -1,7 +1,5 @@
 <center>
 
-<form action="{% url "bitcointransaction" %}" method="post">
-
 <table>
     <br>
     <br>
@@ -12,12 +10,11 @@
 
     {% for i in listoftransaction %}
         <tr>
-            <td> <a href="http://193.2.76.40:8001/blog/accueil">{{i}} </a></td>
+            <td> <a href="http://193.2.76.40:8000/blog/accueil">{{i}} </a></td>
         </tr>
        {% endfor %}
 
 </table>
 
-</div>
-
 </center>
+
