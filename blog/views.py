@@ -30,8 +30,8 @@ def listoftransactionid(request, height):
     return render(request, 'blog/listoftransactionid.html', locals())
 
 
-def listofinputsandouputs(request, txid):
-    rawtransaction = getrawtransactionfromtransactionid(txid)
+def listofinputsandouputs(request, transactionid):
+    rawtransaction = getrawtransactionfromtransactionid(transactionid)
     decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
     listofvoutaddresses = getVoutaddresses(decodedtransaction)
     listofvinaddresses = getVinaddresses(decodedtransaction)
