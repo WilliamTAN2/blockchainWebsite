@@ -14,8 +14,8 @@ urlpatterns = [
     path('script/', views.script, name='script'),
     path('testpython/', views.testpython, name='testpython'),
     path('bitcointransaction/', views.askheight, name='askheight'),
-    path('bitcointransaction/<int:height>', views.listoftransactionid, name='listoftransactionid'),
-    path('bitcointransaction/<int:height>/<slug:txid>', views.listofinputsandouputs, name='listofinputsandoutputs'),
+    path('bitcointransaction/<int:height>$', views.listoftransactionid, name='listoftransactionid'),
+    path('bitcointransaction/<int:height>/<slug:txid>$', views.listofinputsandouputs, name='listofinputsandoutputs'),
     path('testurl/', views.testurl, name='testurl'),
     path('testurl/<slug:sujet>/<slug:verbe>', views.testurlwithvariables, name='testurlwithvariables'),
 ]
