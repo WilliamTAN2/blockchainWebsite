@@ -1,1 +1,5 @@
-<p>{{ blockhash }}</p>
+<form action="{% url "bitcointransaction" %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
