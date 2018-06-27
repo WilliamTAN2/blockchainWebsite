@@ -35,8 +35,8 @@ def listofinputsandouputs(request, transactionid):
     decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
     listofvoutaddresses = getVoutaddresses(decodedtransaction)
     listofvinaddresses = getVinaddresses(decodedtransaction)
-    print(listofvoutaddresses)
-    print(listofvinaddresses)
+    listofvaluesout =getValuesOut(decodedtransaction)
+
 
     return render(request, 'blog/inputsandoutputs.html', locals())
 

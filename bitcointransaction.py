@@ -81,3 +81,15 @@ def getVinaddresses(decodedtransaction):
             listofvinaddresses.append(getVinaddress(listofvintransaction[j],listofvinposition[j]))
 
     return listofvinaddresses
+
+def getValuesOut(decodedtransaction):
+    listofvaluesout = [] #list of values of bitcoin transfert out
+
+    jsontransaction = json.loads(decodedtransaction)
+
+    #Getting the values output from vout
+    for i in range(0, len(jsontransaction["vout"])):
+        listofvaluesout.append(jsontransaction["vout"][i]["value"])
+    print("list of values per wallets :")
+    print(listofvaluesout)
+    return listofvaluesout
