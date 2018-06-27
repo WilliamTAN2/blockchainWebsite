@@ -71,11 +71,11 @@ def getVinaddresses(decodedtransaction):
     jsontransaction = json.loads(decodedtransaction)
 
     #appel de getVin
-    if 'txid' in jsontransaction['vin']:
+    if 'txid' in jsontransaction['vin'][0]:
         for j in range(0, len(jsontransaction["vin"])):
             listofvintransaction.append(jsontransaction["vin"][j]["txid"])
 
-    if 'vout' in jsontransaction['vin']:
+    if 'vout' in jsontransaction['vin'][0]:
         for j in range(0, len(jsontransaction["vin"])):
             listofvinposition.append(jsontransaction["vin"][j]["vout"])
             listofvinaddresses.append(getVinaddress(listofvintransaction[j],listofvinposition[j]))
