@@ -7,7 +7,6 @@ from django.shortcuts import render, get_object_or_404
 from blog.models import Article
 from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
 
-# some_file.py
 import sys
 sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
 import inputs_outputs
