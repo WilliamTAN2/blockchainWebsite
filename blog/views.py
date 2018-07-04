@@ -28,7 +28,7 @@ def listoftransactionid(request, height):
 
     blockhash = inputs_outputs.getblockhashfromheight(height)
     block = inputs_outputs.getblockfromblockhash(blockhash)
-    listoftransactionid = getlistoftransactionidfromblock(block)
+    listoftransactionid = inputs_outputs.getlistoftransactionidfromblock(block)
     print(listoftransactionid)
 
     return render(request, 'blog/listoftransactionid.html', locals())
