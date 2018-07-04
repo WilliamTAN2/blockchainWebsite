@@ -10,7 +10,7 @@ from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
 # some_file.py
 import sys
 sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
-from inputs_outputs import *
+import inputs_outputs
 
 def askheight(request):
     form=ScriptForm(request.POST or None)
@@ -26,8 +26,8 @@ def listoftransactionid(request, height):
     listofvoutaddresses = [] #list of addresses of the output
     listofvinaddresses = [] #list of addresses of the input of the current transaction
 
-    blockhash = getblockhashfromheight(height)
-    block = getblockfromblockhash(blockhash)
+    blockhash = inputs_outputs.getblockhashfromheight(height)
+    block = inputs_outputs.getblockfromblockhash(blockhash)
     listoftransactionid = getlistoftransactionidfromblock(block)
     print(listoftransactionid)
 
