@@ -10,7 +10,7 @@ from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
 # some_file.py
 import sys
 sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
-import inputs_outputs
+from inputs_outputs import *
 
 def askheight(request):
     form=ScriptForm(request.POST or None)
