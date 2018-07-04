@@ -35,11 +35,11 @@ def listoftransactionid(request, height):
 
 
 def listofinputsandouputs(request, transactionid):
-    rawtransaction = getrawtransactionfromtransactionid(transactionid)
-    decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
-    listofvoutaddresses = getVoutaddresses(decodedtransaction)
-    listofvinaddresses = getVinaddresses(decodedtransaction)
-    listofvaluesout =getValuesOut(decodedtransaction)
+    rawtransaction = inputs_outputs.getrawtransactionfromtransactionid(transactionid)
+    decodedtransaction = inputs_outputs.decoderawtransactionfromrawtransaction(rawtransaction)
+    listofvoutaddresses = inputs_outputs.getVoutaddresses(decodedtransaction)
+    listofvinaddresses = inputs_outputs.getVinaddresses(decodedtransaction)
+    listofvaluesout = inputs_outputs.getValuesOut(decodedtransaction)
 
 
     return render(request, 'blog/inputsandoutputs.html', locals())
