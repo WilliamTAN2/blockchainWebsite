@@ -6,7 +6,7 @@ from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
 from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
-from bitcointransaction import *
+from scripts import *
 
 def askheight(request):
     form=ScriptForm(request.POST or None)
