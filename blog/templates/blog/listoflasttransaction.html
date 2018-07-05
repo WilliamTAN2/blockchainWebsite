@@ -1,0 +1,19 @@
+<center>
+
+<table>
+    <br>
+    <br>
+
+   <tr>
+       <th>Most recent transactions until newly generated piece</th>
+   </tr>
+
+    {% for i in range(0, len(listofmostrecenttransaction)) %}
+        <tr>
+            <td> {{listofmostrecenttransaction[i]}} </td>
+        </tr>
+       {% endfor %}
+
+</table>
+
+</center>

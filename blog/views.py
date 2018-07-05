@@ -5,20 +5,36 @@ from django.shortcuts import redirect
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from blog.models import Article
-from .forms import ContactForm, ArticleForm, ScriptForm, TestUrlForm
+from .forms import ContactForm, ArticleForm, ScriptInputsOutputsForm, TestUrlForm, ScriptRecentTransactionForm
 
 import sys
 sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
-import inputs_outputs
+import inputs_outputs, recent_transaction
 
 def askheight(request):
-    form=ScriptForm(request.POST or None)
+    form=ScriptInputsOutputsForm(request.POST or None)
     if form.is_valid():
         # Ici nous pouvons traiter les données du formulaire
         height = form.cleaned_data['height']
         return HttpResponseRedirect(reverse('listoftransactionid', args=(height,)))
     else:
         return render(request, 'blog/askheight.html', locals())
+
+
+def asktxid(request):
+    form=ScriptRecentTransactionForm(request.POST or None)
+    if form.is_valid():
+        # Ici nous pouvons traiter les données du formulaire
+        txid = form.cleaned_data['txid']
+        return HttpResponseRedirect(reverse('listoftransactionid', args=(height,)))
+    else:
+        return render(request, 'blog/asktxid.html', locals())
+
+def recenttransaction(request, txid):
+    listofmostrecenttransaction = [] #list storing the most recent transaction until there is none
+
+    listofmostrecenttransaction = recent_transaction.getlistoflasttransaction(txid)
+    return render(request, 'blog/listoflasttransaction.html', locals())
 
 def listoftransactionid(request, height):
     listoftransactionid = [] #list storing the transaction ids
@@ -28,7 +44,6 @@ def listoftransactionid(request, height):
     blockhash = inputs_outputs.getblockhashfromheight(height)
     block = inputs_outputs.getblockfromblockhash(blockhash)
     listoftransactionid = inputs_outputs.getlistoftransactionidfromblock(block)
-    print(listoftransactionid)
 
     return render(request, 'blog/listoftransactionid.html', locals())
 

@@ -13,9 +13,10 @@ urlpatterns = [
     path('creerarticle/', views.creerarticle, name='creationarticle'),
     path('script/', views.script, name='script'),
     path('testpython/', views.testpython, name='testpython'),
-    path('bitcointransaction/', views.askheight, name='askheight'),
-    path('bitcointransaction/<int:height>', views.listoftransactionid, name='listoftransactionid'),
-    path('bitcointransaction/<slug:transactionid>', views.listofinputsandouputs, name='listofinputsandoutputs'),
+    path('inputsandoutputs/', views.askheight, name='askheight'),
+    path('inputsandoutputs/<int:height>', views.listoftransactionid, name='listoftransactionid'),
+    path('inputsandoutputs/<slug:transactionid>', views.listofinputsandouputs, name='listofinputsandoutputs'),
+    path('recenttransaction/', views.asktxid, name='asktxid'),
     path('testurl/', views.testurl, name='testurl'),
     path('testurl/<slug:sujet>/<slug:verbe>', views.testurlwithvariables, name='testurlwithvariables'),
 ]

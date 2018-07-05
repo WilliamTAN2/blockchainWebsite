@@ -63,4 +63,13 @@ def getlasttransaction(txid):
         return mostrecenttransaction
 
     else:
-        return 0
+        return None
+
+def getlistoflasttransaction(txid):
+    listofmostrecenttransaction = [] #list storing the most recent transaction until there is none
+
+    while txid is not None:
+        listofmostrecenttransaction.append(txid)
+        txid = getlasttransaction(txid)
+
+    return listofmostrecenttransaction
