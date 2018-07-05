@@ -29,7 +29,7 @@
             var i = "hey i heard you were a wild one";
 
             var nodes = [
-                {id: 0, label: {{ listofmostrecenttransaction.0|stringformat:"s" }}, group: 9},
+                {id: 0, label: "{{ listofmostrecenttransaction.0 }}", group: 9},
                 /*{% for x in listofmostrecenttransaction %}
                     {id: {{ forloop.counter0 }}, label: {{x}}, group: 9},
                 {% endfor %}*/
