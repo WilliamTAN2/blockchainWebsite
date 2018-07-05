@@ -17,6 +17,7 @@ urlpatterns = [
     path('inputsandoutputs/<int:height>', views.listoftransactionid, name='listoftransactionid'),
     path('inputsandoutputs/<slug:transactionid>', views.listofinputsandouputs, name='listofinputsandoutputs'),
     path('recenttransaction/', views.asktxid, name='asktxid'),
+    path('recenttransaction/<slug:txid>', views.recenttransaction, name='recenttransaction'),
     path('testurl/', views.testurl, name='testurl'),
     path('testurl/<slug:sujet>/<slug:verbe>', views.testurlwithvariables, name='testurlwithvariables'),
 ]

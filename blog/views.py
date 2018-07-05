@@ -26,7 +26,7 @@ def asktxid(request):
     if form.is_valid():
         # Ici nous pouvons traiter les données du formulaire
         txid = form.cleaned_data['txid']
-        return HttpResponseRedirect(reverse('listoftransactionid', args=(height,)))
+        return HttpResponseRedirect(reverse('recenttransaction', args=(txid,)))
     else:
         return render(request, 'blog/asktxid.html', locals())
 
