@@ -33,10 +33,11 @@
                     {id: {{ forloop.counter0 }}, label: "{{x}}"},
                 {% endfor %}
                         ];
-            var edges = [/*{from: 1, to: 0, label: 'oh yeah', font: {align: 'bottom'}},
-                         {from: 2, to: 0},
-                         {from: 4, to: 3},
-                         {from: 5, to: 4},*/
+            var edges = [
+                {% for x in listofmostrecenttransaction %}
+                    {from: {{ forloop.counter0 }}, to: {{ forloop.counter0 + 1 }}},
+                {% endfor %}
+                        //{from: 1, to: 0, label: 'oh yeah', font: {align: 'bottom'}},
                         ]
 
             // create a network
