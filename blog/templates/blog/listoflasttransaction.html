@@ -29,9 +29,10 @@
             var i;
 
             var nodes = [
-                {% for x in listofmostrecenttransaction %}
+                {id: 0, label: "hey", group: 9},
+                /*{% for x in listofmostrecenttransaction %}
                     {id: {{ forloop.counter0 }}, label: {{x}}, group: 9},
-                {% endfor %}
+                {% endfor %}*/
                         ];
             var edges = [{from: 1, to: 0, label: 'oh yeah', font: {align: 'bottom'}},
                          {from: 2, to: 0},
