@@ -35,7 +35,7 @@
                         ];
             var edges = [
                 {% for x in listofmostrecenttransaction %}
-                    {from: {{ forloop.counter0 }}, to: {{ forloop.counter0 + 1 }}},
+                    {from: {{ forloop.counter0 }}, to: {{ forloop.counter0|add:"1" }}},
                 {% endfor %}
                         //{from: 1, to: 0, label: 'oh yeah', font: {align: 'bottom'}},
                         ]
