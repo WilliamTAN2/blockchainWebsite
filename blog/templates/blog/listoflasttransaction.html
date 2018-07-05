@@ -8,9 +8,9 @@
        <th>Most recent transactions until newly generated piece</th>
    </tr>
 
-    {% for i in range(0, len(listofmostrecenttransaction)) %}
+    {% for x in range listofmostrecenttransaction %}
         <tr>
-            <td> {{listofmostrecenttransaction[i]}} </td>
+            <td> {{x}} </td>
         </tr>
        {% endfor %}
 
