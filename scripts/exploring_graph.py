@@ -28,8 +28,8 @@ class Graph(object):
 
 def exploregraph(txid, number_of_nodes):
     """Set number_of_nodes to 1 at the start"""
-    listofmostrecenttransaction = recent_transaction.getlistoflasttransaction(txid)
-    print(listofmostrecenttransaction)
+    listofprevioustransactions = recent_transaction.getlistofprevioustransactions(txid)
+    print(listofprevioustransactions)
 
     g = Graph()
     g.add_node(txid, None, 0, 0)

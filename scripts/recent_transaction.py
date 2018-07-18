@@ -40,6 +40,21 @@ def gettimestampfromtxid(txid):
 
     return jsonblock["time"]
 
+def getlistofprevioustransactions(txid):
+    listoflasttransactions =[] #list of the previous transaction
+
+    rawtransaction = getrawtransactionfromtransactionid(txid)
+    decodedtransaction = decoderawtransactionfromrawtransaction(rawtransaction)
+
+    #Converting the decoding transaction to json
+    jsontransaction = json.loads(decodedtransaction)
+
+    if 'txid' in jsontransaction['vin'][0]:
+        for j in range(0, len(jsontransaction["vin"])):
+            listoflasttransactions.append(jsontransaction["vin"][j]["txid"])
+
+    return listoflasttransactions
+
 def getlasttransaction(txid):
     comparator=0
     listoflasttransactions =[] #list of the previous transaction
