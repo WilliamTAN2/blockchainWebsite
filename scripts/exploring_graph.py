@@ -20,7 +20,6 @@ class Graph(object):
 
     def get_new_average(self, txid, time, number_of_nodes):
         temp_sum = self.get_average(txid) * number_of_nodes + time
-        number_of_nodes += 1
         new_average = temp_sum/number_of_nodes
         return new_average
 
@@ -29,7 +28,6 @@ class Graph(object):
 def exploregraph(txid, number_of_nodes):
     """Set number_of_nodes to 1 at the start"""
     listofprevioustransactions = recent_transaction.getlistofprevioustransactions(txid)
-    print(listofprevioustransactions)
 
     g = Graph()
     g.add_node(txid, None, 0, 0)
