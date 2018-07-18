@@ -21,7 +21,7 @@ class Graph(object):
                 return node.average
 
     def get_new_average(self, txid, time, number_of_nodes):
-        temp_sum = self.get_average(txid) * number_of_nodes + time
+        temp_sum = self.get_average(txid) * (number_of_nodes - 1) + time
         new_average = temp_sum / number_of_nodes
         return new_average
 
