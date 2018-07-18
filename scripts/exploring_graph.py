@@ -11,7 +11,7 @@ class Graph(object):
 
     def add_node(self, txid, parent, average, number_of_nodes):
         self.nodes_list.append(Node(txid, parent, average, number_of_nodes))
-        print(self.nodes_list)
+        print(Node(txid, parent, average, number_of_nodes))
 
     def get_average(self, txid):
         for node in self.nodes_list:
