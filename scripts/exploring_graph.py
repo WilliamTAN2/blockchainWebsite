@@ -34,11 +34,11 @@ def exploregraph(txid, number_of_nodes):
     listoftransactionid = inputs_outputs.getlistoftransactionidfromblock(block)
 
     g = Graph()
-    g.add_node(g, txid, None, 0, 0)
+    g.add_node(txid, None, 0, 0)
 
     for child_txid in listoftransactionid:
         time = recent_transaction.gettimestampfromtxid(txid) - recent_transaction.gettimestampfromtxid(child_txid)
-        g.add_node(g, child_txid, txid, g.get_new_average(g, txid, time, number_of_nodes), number_of_nodes)
+        g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
         exploregraph(child_txid, number_of_nodes+1)
     return g.nodes_list
 
