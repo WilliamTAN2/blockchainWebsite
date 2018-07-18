@@ -11,7 +11,7 @@ class Graph(object):
 
     def add_node(self, txid, parent, average, number_of_nodes):
         self.nodes_list.append(Node(txid, parent, average, number_of_nodes))
-        print(Node(txid, parent, average, number_of_nodes))
+        print(self.nodes_list)
 
     def get_average(self, txid):
         for node in self.nodes_list:
@@ -29,6 +29,7 @@ class Graph(object):
 def exploregraph(txid, number_of_nodes):
     """Set number_of_nodes to 1 at the start"""
     listofmostrecenttransaction = recent_transaction.getlistoflasttransaction(txid)
+    print(listofmostrecenttransaction)
 
     g = Graph()
     g.add_node(txid, None, 0, 0)
@@ -39,3 +40,5 @@ def exploregraph(txid, number_of_nodes):
         exploregraph(child_txid, number_of_nodes+1)
     return g.nodes_list
 
+def test():
+    exploregraph('b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1)
