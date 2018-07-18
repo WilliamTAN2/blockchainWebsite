@@ -14,7 +14,7 @@ class Graph(object):
         print(self.nodes_list)
 
     def get_average(self, txid):
-        for node in self.node_list:
+        for node in self.nodes_list:
             if node.txid == txid:
                 return node.average
 
