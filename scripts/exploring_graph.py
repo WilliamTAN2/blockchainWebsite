@@ -11,7 +11,9 @@ class Graph(object):
 
     def add_node(self, txid, parent, average, number_of_nodes):
         self.nodes_list.append(Node(txid, parent, average, number_of_nodes))
-        print("LA LISTE EST LA ====> \n" + self.nodes_list + "FIN DE LA LISTE\n")
+        print("LA LISTE EST LA ====> \n")
+        print(self.nodes_list)
+        print("FIN DE LA LISTE\n")
 
     def get_average(self, txid):
         for node in self.nodes_list:
