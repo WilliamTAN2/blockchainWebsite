@@ -36,7 +36,7 @@ def exploregraph(g, txid, number_of_nodes):
     for child_txid in listofprevioustransactions:
         time = recent_transaction.gettimestampfromtxid(txid) - recent_transaction.gettimestampfromtxid(child_txid)
         g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
-        exploregraph(child_txid, number_of_nodes + 1)
+        exploregraph(g, child_txid, number_of_nodes + 1)
     return g.nodes_list
 
 
