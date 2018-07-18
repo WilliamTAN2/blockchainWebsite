@@ -30,7 +30,7 @@ def exploregraph(g, txid, number_of_nodes):
     """Set number_of_nodes to 1 at the start"""
     listofprevioustransactions = recent_transaction.getlistofprevioustransactions(txid)
 
-    if number_of_nodes == 1
+    if number_of_nodes == 1:
         g.add_node(txid, None, 0, 0)
 
     for child_txid in listofprevioustransactions:
