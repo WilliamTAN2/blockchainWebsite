@@ -1,9 +1,11 @@
 import inputs_outputs, recent_transaction
 from collections import namedtuple
+import math
 
 Node_fields = ['txid', 'parent', 'average', 'number_of_nodes']
 Node = namedtuple('Node', Node_fields)
-
+shortest_route_average_time = math.inf
+fastest_node = Node()
 
 class Graph(object):
     def __init__(self):
@@ -38,6 +40,9 @@ def exploregraph(g, txid, number_of_nodes, time_limit_in_seconds):
         if time_limit_in_seconds - time >= 0:
             g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
             exploregraph(g, child_txid, number_of_nodes + 1, time_limit_in_seconds - time)
+        if number_of_nodes >= 3 and g.get_new_average(txid, time, number_of_nodes) < shortest_route_average_time:
+            shortest_route_average_time = g.get_new_average(txid, time, number_of_nodes)
+            fastest_node = g.nodes_list[-1]
 
 def days_to_seconds(number_of_days):
     number_of_seconds = number_of_days * 86400
@@ -46,3 +51,4 @@ def days_to_seconds(number_of_days):
 def test():
     g = Graph()
     exploregraph(g, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
+    print(fastest_node)
