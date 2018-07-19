@@ -5,7 +5,7 @@ import math
 Node_fields = ['txid', 'parent', 'average', 'number_of_nodes']
 Node = namedtuple('Node', Node_fields)
 shortest_route_average_time = math.inf
-fastest_node = Node()
+fastest_node = Node(None, None, None, None)
 
 class Graph(object):
     def __init__(self):
