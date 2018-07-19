@@ -38,7 +38,6 @@ def exploregraph(g, txid, number_of_nodes, time_limit_in_seconds):
         if time_limit_in_seconds - time >= 0:
             g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
             exploregraph(g, child_txid, number_of_nodes + 1, time_limit_in_seconds - time)
-    return g.nodes_list
 
 def days_to_seconds(number_of_days):
     number_of_seconds = number_of_days * 86400
