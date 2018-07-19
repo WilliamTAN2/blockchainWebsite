@@ -26,7 +26,7 @@ class Graph(object):
         return new_average
 
 
-def exploregraph(g, txid, number_of_nodes):
+def exploregraph(g, txid, number_of_nodes, time_limit_in_seconds):
     """Set number_of_nodes to 1 at the start"""
     listofprevioustransactions = recent_transaction.getlistofprevioustransactions(txid)
 
@@ -35,11 +35,15 @@ def exploregraph(g, txid, number_of_nodes):
 
     for child_txid in listofprevioustransactions:
         time = recent_transaction.gettimestampfromtxid(txid) - recent_transaction.gettimestampfromtxid(child_txid)
-        g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
-        exploregraph(g, child_txid, number_of_nodes + 1)
+        if time_limit_in_seconds - time >= 0:
+            g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
+            exploregraph(g, child_txid, number_of_nodes + 1, time_limit_in_seconds - time)
     return g.nodes_list
 
+def days_to_seconds(number_of_days):
+    number_of_seconds = number_of_days * 86400
+    return number_of_seconds
 
 def test():
     g = Graph()
-    exploregraph(g, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1)
+    exploregraph(g, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(15))
