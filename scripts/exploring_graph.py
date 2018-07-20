@@ -21,7 +21,7 @@ class Graph(object):
         for node in self.nodes_list:
             if node.txid == parent_txid and node.average < best_parent.average:
                 best_parent = node
-        return node
+        return best_parent
 
     def get_average(self, txid):
         """NOT USED ANYMORE"""
