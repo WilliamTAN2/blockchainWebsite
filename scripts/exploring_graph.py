@@ -48,7 +48,7 @@ def exploregraph(g, g_v, txid, route_len, time_limit_in_seconds):
             g_v.best_node = Node(child_txid, txid, child_average_time, route_len)
         if time_limit_in_seconds - time >= 0:
             g.add_node(child_txid, txid, child_average_time, route_len)
-            exploregraph(g, child_txid, route_len + 1, time_limit_in_seconds - time)
+            exploregraph(g, g_v, child_txid, route_len + 1, time_limit_in_seconds - time)
 
 
 def days_to_seconds(number_of_days):
