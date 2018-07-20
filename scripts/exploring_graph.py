@@ -67,11 +67,11 @@ def days_to_seconds(number_of_days):
     return number_of_seconds
 
 
-def build_path(g, child_node):
+def build_best_path(g, child_node):
     best_path = [child_node]
     best_parent_txid = child_node.parent
     if best_parent_txid is not None:
-        best_path += build_path(g, g.get_best_parent_node(best_parent_txid))
+        best_path += build_best_path(g, g.get_best_parent_node(best_parent_txid))
     return best_path
 
 
@@ -79,5 +79,5 @@ def test():
     g = Graph()
     g_v = GlobalVariable()
     explore_graph(g, g_v, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
-    print(g_v.best_node)
-    print(build_path(g, g_v.best_node))
+    print(g_v.best_node.average)
+    print(build_best_path(g, g_v.best_node))
