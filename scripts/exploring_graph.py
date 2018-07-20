@@ -2,7 +2,7 @@ import inputs_outputs, recent_transaction
 from collections import namedtuple
 import math
 
-Node_fields = ['txid', 'parent', 'average', 'number_of_nodes']
+Node_fields = ['txid', 'parent', 'average', 'route_len']
 Node = namedtuple('Node', Node_fields)
 
 
@@ -10,8 +10,8 @@ class Graph(object):
     def __init__(self):
         self.nodes_list = []
 
-    def add_node(self, txid, parent, average, number_of_nodes):
-        self.nodes_list.append(Node(txid, parent, average, number_of_nodes))
+    def add_node(self, txid, parent, average, route_len):
+        self.nodes_list.append(Node(txid, parent, average, route_len))
         print("LA LISTE EST LA ====> \n")
         print(self.nodes_list)
         print("FIN DE LA LISTE\n")
@@ -21,38 +21,43 @@ class Graph(object):
             if node.txid == txid:
                 return node.average
 
-    def get_new_average(self, txid, time, number_of_nodes):
-        temp_sum = self.get_average(txid) * (number_of_nodes - 1) + time
-        new_average = temp_sum / number_of_nodes
+    def get_new_average(self, txid, time, route_len):
+        temp_sum = self.get_average(txid) * (route_len - 1) + time
+        new_average = temp_sum / route_len
         return new_average
 
 
-def exploregraph(g, txid, number_of_nodes, time_limit_in_seconds):
-    """Set number_of_nodes to 1 at the start"""
+class GlobalVariable(object):
+    def __init__(self):
+        self.best_average_time = math.inf
+        self.best_node = None
+
+
+def exploregraph(g, g_v, txid, route_len, time_limit_in_seconds):
+    """Set route_len to 1 at the start"""
     listofprevioustransactions = recent_transaction.getlistofprevioustransactions(txid)
 
-    if number_of_nodes == 1:
+    if route_len == 1:
         g.add_node(txid, None, 0, 0)
-        shortest_route_average_time = math.inf
-        fastest_node = Node(None, None, None, None)
 
     for child_txid in listofprevioustransactions:
         time = recent_transaction.gettimestampfromtxid(txid) - recent_transaction.gettimestampfromtxid(child_txid)
-        if number_of_nodes >= 3 and g.get_new_average(txid, time, number_of_nodes) < shortest_route_average_time:
-            shortest_route_average_time = g.get_new_average(txid, time, number_of_nodes)
-            fastest_node = Node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
+        child_average_time = g.get_new_average(txid, time, route_len)
+        if route_len >= 3 and child_average_time < g_v.best_average_time:
+            g_v.best_average_time = child_average_time
+            g_v.best_node = Node(child_txid, txid, child_average_time, route_len)
         if time_limit_in_seconds - time >= 0:
-            g.add_node(child_txid, txid, g.get_new_average(txid, time, number_of_nodes), number_of_nodes)
-            shortest_route_average_time, fastest_node = exploregraph(g, child_txid, number_of_nodes + 1, time_limit_in_seconds - time)
-    return shortest_route_average_time, fastest_node
+            g.add_node(child_txid, txid, child_average_time, route_len)
+            exploregraph(g, child_txid, route_len + 1, time_limit_in_seconds - time)
 
 
 def days_to_seconds(number_of_days):
     number_of_seconds = number_of_days * 86400
     return number_of_seconds
 
+
 def test():
     g = Graph()
-    shortest_route_average_time, fastest_node = exploregraph(g, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
-    print(shortest_route_average_time)
-    print(fastest_node)
+    g_v = GlobalVariable()
+    exploregraph(g, g_v, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
+    print((g_v.best_average_time, g_v.best_node))
