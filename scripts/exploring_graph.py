@@ -70,7 +70,8 @@ def days_to_seconds(number_of_days):
 def build_path(g, child_node):
     best_path = [child_node]
     best_parent_txid = getattr(child_node, 'parent')
-    best_path += build_path(g, g.get_best_parent_node(best_parent_txid))
+    if best_parent_txid is not None:
+        best_path += build_path(g, g.get_best_parent_node(best_parent_txid))
     return best_path
 
 
