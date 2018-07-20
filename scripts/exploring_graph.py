@@ -16,12 +16,21 @@ class Graph(object):
         print(self.nodes_list)
         print("FIN DE LA LISTE\n")
 
+    def get_best_parent_node(self, parent_txid):
+        best_parent = Node(None, None, math.inf, None)
+        for node in self.nodes_list:
+            if node.txid == parent_txid and node.average < best_parent.average:
+                best_parent = node
+        return node
+
     def get_average(self, txid):
+        """NOT USED ANYMORE"""
         for node in self.nodes_list:
             if node.txid == txid:
                 return node.average
 
     def get_new_average(self, txid, time, route_len):
+        """NOT USED ANYMORE"""
         temp_sum = self.get_average(txid) * (route_len - 1) + time
         new_average = temp_sum / route_len
         return new_average
@@ -58,7 +67,11 @@ def days_to_seconds(number_of_days):
     return number_of_seconds
 
 
-#def build_path(g, g_v):
+def build_path(g, child_node):
+    best_path = []
+    g.get_best_parent_node(getattr(child_node, 'parent'))
+    best_path += build_path(g, child_node)
+    return best_path
 
 
 
@@ -66,5 +79,5 @@ def test():
     g = Graph()
     g_v = GlobalVariable()
     explore_graph(g, g_v, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
-    print((g_v.best_average_time, g_v.best_node))
-    # print(build_path(g, g_v))
+    print(g_v.best_node)
+    print(build_path(g, g_v.best_node))
