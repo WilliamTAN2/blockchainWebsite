@@ -30,7 +30,7 @@
 
             var nodes = [
                 {% for x in graph %}
-                    {id: {{ forloop.counter0 }}, label: "{{x}}", color : {background: 'blue', border : 'white'}},
+                    {id: {{ forloop.counter0 }}, label: "{{x.txid}}", color : {background: 'blue', border : 'white'}},
                 {% endfor %}
                         ];
             var edges = [
