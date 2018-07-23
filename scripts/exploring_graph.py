@@ -12,9 +12,6 @@ class Graph(object):
 
     def add_node(self, txid, parent, average, route_len):
         self.nodes_list.append(Node(txid, parent, average, route_len))
-        print("LA LISTE EST LA ====> \n")
-        print(self.nodes_list)
-        print("FIN DE LA LISTE\n")
 
     def get_best_parent_node(self, parent_txid):
         best_parent = Node(None, None, math.inf, None)
@@ -75,9 +72,8 @@ def build_best_path(g, child_node):
     return best_path
 
 
-def test():
+def get_final_graph():
     g = Graph()
     g_v = GlobalVariable()
     explore_graph(g, g_v, 'fa2c927ffeb2750e6c0898b5f4140df1a7fc886d4d95e8f53a58d7f713f31c10', 1, days_to_seconds(1))
-    print(g_v.best_node.average)
-    print(build_best_path(g, g_v.best_node))
+    return g.nodes_list, build_best_path(g, g_v.best_node)

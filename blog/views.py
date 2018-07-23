@@ -9,7 +9,7 @@ from .forms import ContactForm, ArticleForm, ScriptInputsOutputsForm, TestUrlFor
 
 import sys
 sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
-import inputs_outputs, recent_transaction
+import inputs_outputs, recent_transaction, exploring_graph
 
 def askheight(request):
     form=ScriptInputsOutputsForm(request.POST or None)
@@ -31,9 +31,10 @@ def asktxid(request):
         return render(request, 'blog/asktxid.html', locals())
 
 def recenttransaction(request, txid):
-    listofmostrecenttransaction = [] #list storing the most recent transaction until there is none
+    graph = [] #list storing all the nodes
+    best_path = [] #list storing the best path
 
-    listofmostrecenttransaction = recent_transaction.getlistoflasttransaction(txid)
+    graph, best_path = exploring_graph.get_final_graph()
     return render(request, 'blog/listoflasttransaction.html', locals())
 
 def listoftransactionid(request, height):
