@@ -35,7 +35,7 @@
                         ];
             var edges = [
                 {% for x in graph %}
-                    {from: {{ x.parent }}, to: {{ x.txid }}},
+                    {from: {{ forloop.counter0 }}, to: {{ forloop.counter0|add:"1" }}},
                 {% endfor %}
                         //{from: 1, to: 0, label: 'oh yeah', font: {align: 'bottom'}},
                         ]
@@ -81,7 +81,7 @@
                 </tr>
                 <br>
 
-                {% for x in listofmostrecenttransaction %}
+                {% for x in best_path %}
                 <tr>
                     <td> {{x}} </td>
                 </tr>
