@@ -30,7 +30,7 @@
 
             var nodes = [
                 {% for x in listofmostrecenttransaction %}
-                    {id: {{ forloop.counter0 }}, label: "{{x}}"},
+                    {id: {{ forloop.counter0 }}, label: "{{x}}", color : 'white'},
                 {% endfor %}
                         ];
             var edges = [
