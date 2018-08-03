@@ -34,20 +34,3 @@ def delai(x):
                 '3': 26280000
         }.get(x, 68400)
 
-
-transactionid=input("enter the id of the transaction you are looking for :")
-timestamp=get_timestamp(transactionid)
-choice=input("On which periode do you want to make the studie ? 1: a day  2: a week  3: a month") # le switch marche pas en python
-delai=delai(choice)
-timestamp=timestamp+delai
-print(timestamp)
-children=get_children(transactionid,str(timestamp))
-print(children)
-while True:
-        for i in children:
-                result=get_children(i[0],str(timestamp))
-                children.append(result[0]) #need to find a way to leave the loop
-                print(i)
-        break
-print(children)
-
