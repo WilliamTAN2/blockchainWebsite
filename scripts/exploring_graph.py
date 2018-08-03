@@ -48,11 +48,11 @@ def explore_graph_forward(g, g_v, txid, route_len, time_limit_in_seconds):
 
     if route_len == 1:
         g.add_node(txid, None, 0, 0)
-        g_v.source_timestamp = recent_transaction.gettimestampfromtxid(txid)
+        g_v.source_timestamp = tree.gettimestamp(txid)
 
     for child_txid in listoftransactions:
-        time = recent_transaction.gettimestampfromtxid(txid) - recent_transaction.gettimestampfromtxid(child_txid)
-        child_average_time = (g_v.source_timestamp - recent_transaction.gettimestampfromtxid(child_txid)) / route_len
+        time = tree.gettimestamp(txid) - tree.gettimestamp(child_txid)
+        child_average_time = (g_v.source_timestamp - tree.gettimestamp(child_txid)) / route_len
         if route_len >= 3 and child_average_time < g_v.best_average_time:
             g_v.best_average_time = child_average_time
             g_v.best_node = Node(child_txid, txid, child_average_time, route_len)
