@@ -13,9 +13,9 @@ cnx = mysql.connector.connect(user='root', password='Alexis2018!',host='localhos
 cursor = cnx.cursor()
 
 
-def get_children(transactionid, timestamp):
+def get_children(transactionid, delai):
         children=[]
-        timestamp = int(get_timestamp(transactionid)) + delai
+        timestamp = get_timestamp(transactionid) + delai
         query=("SELECT transaction, timestamp FROM transactions WHERE previoustransaction LIKE  '"+transactionid+"' and timestamp<"+timestamp)
         cursor.execute(query)
         children=cursor.fetchall()
