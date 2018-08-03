@@ -28,10 +28,3 @@ def get_timestamp(transactionid):
         timestamp=cursor.fetchall()
         return(timestamp[0][0])
 
-def delai(x):
-        return {
-                '1': 86400,
-                '2': 604800,
-                '3': 26280000
-        }.get(x, 68400)
-
