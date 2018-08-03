@@ -44,7 +44,7 @@ class GlobalVariable(object):
 
 def explore_graph_forward(g, g_v, txid, route_len, time_limit_in_seconds):
     """Set route_len to 1 at the start"""
-    listoftransactions = tree.get_children(txid, str(days_to_seconds(2))
+    listoftransactions = tree.get_children(txid, str(days_to_seconds(2)))
 
     if route_len == 1:
         g.add_node(txid, None, 0, 0)
