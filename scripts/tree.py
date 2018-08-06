@@ -14,12 +14,16 @@ cursor = cnx.cursor()
 
 
 def get_children(transactionid, delai):
-        children=[]
         timestamp = get_timestamp(transactionid) + delai
-        query=("SELECT transaction FROM transactions WHERE previoustransaction LIKE  '"+transactionid+"' and timestamp<"+str(timestamp))
+        children=[]
+        elements=[]
+        query=("SELECT transaction FROM transactions WHERE previoustransaction LIKE  '%"+transactionid+"%' and timestamp<"+str(timestamp))
         cursor.execute(query)
-        children=cursor.fetchall()
+        elements=cursor.fetchall()
+        for i in elements:
+                children.append(''.join(i))
         return(children)
+
 
 def get_timestamp(transactionid):
         timestamp=[]
