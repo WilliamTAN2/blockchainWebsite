@@ -51,7 +51,7 @@ def explore_graph_forward(g, g_v, txid, route_len, time_limit_in_seconds):
         g_v.source_timestamp = tree.get_timestamp(txid)
 
     for child_txid in listoftransactions:
-        time = tree.get_timestamp(txid) - tree.get_timestamp(child_txid)
+        time =  tree.get_timestamp(child_txid) - tree.get_timestamp(txid)
         child_average_time = (g_v.source_timestamp - tree.get_timestamp(child_txid)) / route_len
         if route_len >= 3 and child_average_time < g_v.best_average_time:
             g_v.best_average_time = child_average_time
