@@ -106,3 +106,4 @@ def test_forward():
     explore_graph_forward(g, g_v, '1824bac57c0ba9565e867a4915906a9c78c83ba3f668d0164bb0c4c9acb34fac', 1, days_to_seconds(1))
     print(g_v.best_node.average)
     print(build_best_path(g, g_v.best_node))
+    print(g.nodes_list)
