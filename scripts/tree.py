@@ -10,7 +10,7 @@ import mysql.connector
 BITCOIND_PATH = '/home/abrochec/blockchain/bitcoin-0.16.1'
 
 cnx = mysql.connector.connect(user='root', password='Alexis2018!',host='localhost',database='miners') #10
-cursor = cnx.cursor()
+cursor = cnx.cursor(buffered=True)
 
 
 def get_children(transactionid, delai):
