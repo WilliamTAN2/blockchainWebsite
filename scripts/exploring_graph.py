@@ -19,6 +19,7 @@ class Graph(object):
         print("FIN DE LA LISTE\n")
 
     def add_to_map(self, txid, parent, average, route_len):
+        print("START")
         if txid not in self.map:
             self.map[txid] = [parent, average, route_len]
         else:
