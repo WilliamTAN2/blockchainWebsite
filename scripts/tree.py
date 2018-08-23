@@ -9,7 +9,7 @@ import mysql.connector
 
 BITCOIND_PATH = '/home/abrochec/blockchain/bitcoin-0.16.1'
 
-cnx = mysql.connector.connect(user='root', password='Alexis2018!',host='localhost',database='miners') #10
+cnx = mysql.connector.connect(user='root', password='Alexis2018!',host='localhost',database='miners', buffered=True) #10
 cursor = cnx.cursor(buffered=True)
 
 
