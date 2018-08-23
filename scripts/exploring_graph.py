@@ -6,14 +6,27 @@ Node_fields = ['txid', 'parent', 'average', 'route_len']
 Node = namedtuple('Node', Node_fields)
 
 
+
 class Graph(object):
     def __init__(self):
         self.nodes_list = []
+        self.map = {}
 
     def add_node(self, txid, parent, average, route_len):
         self.nodes_list.append(Node(txid, parent, average, route_len))
         print("LA LISTE EST LA ====> \n")
         print(self.nodes_list)
+        print("FIN DE LA LISTE\n")
+
+    def add_to_map(self, txid, parent, average, route_len):
+        if txid not in map:
+            self.map[txid] = [parent, average, route_len]
+        else:
+            print("existe déjà")
+            if average < self.map[txid][1]:
+                self.map[txid] = [parent, average, route_len]
+        print("LA LISTE EST LA ====> \n")
+        print(self.map)
         print("FIN DE LA LISTE\n")
 
     def get_best_parent_node(self, parent_txid):
@@ -59,6 +72,24 @@ def explore_graph_forward(g, g_v, txid, route_len, time_limit_in_seconds):
         if time_limit_in_seconds - time >= 0:
             g.add_node(child_txid, txid, child_average_time, route_len)
             explore_graph_forward(g, g_v, child_txid, route_len + 1, time_limit_in_seconds - time)
+
+def explore_graph_with_pq(g, g_v, txid, route_len, time_limit_in_seconds):
+    """Set route_len to 1 at the start"""
+    listoftransactions = tree.get_children(txid, str(days_to_seconds(2)))
+
+    if route_len == 1:
+        g.add_to_map(txid, None, 0, 0)
+        g_v.source_timestamp = tree.get_timestamp(txid)
+
+    for child_txid in listoftransactions:
+        time = tree.get_timestamp(txid) - tree.get_timestamp(child_txid)
+        child_average_time = (tree.get_timestamp(child_txid) - g_v.source_timestamp) / route_len
+        if route_len >= 3 and child_average_time < g_v.best_average_time:
+            g_v.best_average_time = child_average_time
+            g_v.best_node = Node(child_txid, txid, child_average_time, route_len)
+        if time_limit_in_seconds - time >= 0:
+            g.add_to_map(child_txid, txid, child_average_time, route_len)
+            explore_graph_with_pq(g, g_v, child_txid, route_len + 1, time_limit_in_seconds - time)
 
 
 def explore_graph(g, g_v, txid, route_len, time_limit_in_seconds):
