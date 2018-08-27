@@ -37,15 +37,9 @@ def get_timestamp(transactionid):
 def get_children_with_pq(transactionid, delai, source_timestamp):
     timestamp = get_timestamp(transactionid) + int(delai)
     children = []
-    elements = []
     query = (
-                "SELECT transaction, timestamp FROM transactions WHERE previoustransaction LIKE  '%" + transactionid + "%' and timestamp<" + str(
+                "SELECT timestamp, transaction, previoustransaction FROM transactions WHERE previoustransaction LIKE  '%" + transactionid + "%' and timestamp<" + str(
             timestamp))
     cursor.execute(query)
-    elements = cursor.fetchall()
-    for data_tuple in elements:
-        time = data_tuple[1] - source_timestamp
-        heapq.heappush(children, (time, data_tuple[0]))
-    heapq.heappush(children, (5, 'haha'))
-    print(children)
+    children = cursor.fetchall()
     return children
