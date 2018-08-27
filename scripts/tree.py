@@ -6,6 +6,7 @@ import re
 import json
 from collections import Counter
 import mysql.connector
+import heapq
 
 BITCOIND_PATH = '/home/abrochec/blockchain/bitcoin-0.16.1'
 
@@ -32,3 +33,17 @@ def get_timestamp(transactionid):
         timestamp=cursor.fetchall()
         return(timestamp[0][0])
 
+
+def get_children_with_pq(transactionid, delai, source_timestamp):
+    timestamp = get_timestamp(transactionid) + int(delai)
+    children = []
+    elements = []
+    query = (
+                "SELECT transaction, timestamp FROM transactions WHERE previoustransaction LIKE  '%" + transactionid + "%' and timestamp<" + str(
+            timestamp))
+    cursor.execute(query)
+    elements = cursor.fetchall()
+    for i in elements:
+        time = elements[1] - source_timestamp
+        heapq.heappush(children, (time, elements[0]))
+    return children
