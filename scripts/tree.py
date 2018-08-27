@@ -46,4 +46,5 @@ def get_children_with_pq(transactionid, delai, source_timestamp):
     for data_tuple in elements:
         time = data_tuple[1] - source_timestamp
         heapq.heappush(children, (time, data_tuple[0]))
+    print(children)
     return children
