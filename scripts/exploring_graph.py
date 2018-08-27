@@ -87,6 +87,7 @@ def explore_graph_with_pq(g, g_v, txid,  time_limit_in_seconds):
         g.add_node(txid, parent, time_to_source, route_len)
         route_len = route_len + 1
         children_list = tree.get_children_with_pq(txid, str(days_to_seconds(1)), g_v.source_timestamp)
+        print(children_list)
         for child in children_list:
             if child[0] < time_limit_in_seconds:
                 heapq.heappush(priority_queue, (child[0], child[1], child[2], route_len))
@@ -143,6 +144,3 @@ def test_pq():
     g = Graph()
     g_v = GlobalVariable()
     explore_graph_with_pq(g, g_v, '1824bac57c0ba9565e867a4915906a9c78c83ba3f668d0164bb0c4c9acb34fac', days_to_seconds(1))
-    print(g_v.best_node.average)
-    print(build_best_path(g, g_v.best_node))
-    print(g.nodes_list)
