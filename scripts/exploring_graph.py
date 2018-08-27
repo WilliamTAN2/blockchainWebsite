@@ -25,7 +25,7 @@ class Graph(object):
         else:
             print("existe déjà")
             if average < self.map[txid][1]:
-                self.map.update() = [parent, average, route_len]
+                self.map = [parent, average, route_len]
         print("LA LISTE EST LA ====> \n")
         print(self.map)
         print("FIN DE LA LISTE\n")
