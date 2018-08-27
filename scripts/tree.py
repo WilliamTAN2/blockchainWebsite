@@ -44,6 +44,7 @@ def get_children_with_pq(transactionid, delai, source_timestamp):
     cursor.execute(query)
     elements = cursor.fetchall()
     for i in elements:
-        time = elements[1] - source_timestamp
-        heapq.heappush(children, (time, elements[0]))
+        print(elements)
+        time = int(elements[1]) - source_timestamp
+        heapq.heappush(children, (time, str(elements[0])))
     return children
