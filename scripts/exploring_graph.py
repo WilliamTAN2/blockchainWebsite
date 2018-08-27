@@ -84,7 +84,7 @@ def explore_graph_with_pq(g, g_v, txid,  time_limit_in_seconds):
     heapq.heappush(priority_queue, (0, txid, None, 0)) #heap item data structure : (time_to_source, txid, parent, route_len)
 
     while priority_queue:
-        (time_to_source, txid, parent) = heapq.heappop(priority_queue)
+        time_to_source, txid, parent = heapq.heappop(priority_queue)
         g.add_node(txid, parent, time_to_source, route_len)
         route_len = route_len + 1
         children_list = tree.get_children_with_pq(txid, str(days_to_seconds(1)), g_v.source_timestamp)
