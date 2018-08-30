@@ -34,7 +34,7 @@ def recenttransaction(request, txid):
     graph = [] #list storing all the nodes
     best_path = [] #list storing the best path
 
-    graph, best_path = exploring_graph.get_final_graph()
+    graph, best_path = exploring_graph.explore_graph()
     return render(request, 'blog/listoflasttransaction.html', locals())
 
 def listoftransactionid(request, height):
