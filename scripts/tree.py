@@ -41,6 +41,7 @@ def get_children_with_pq(transactionid, delai, source_timestamp):
              "FROM transactions"
              "WHERE previoustransaction LIKE  '%" + transactionid +
              "%' and timestamp<" + str(timestamp))
+    print(query)
     cursor.execute(query)
     children = cursor.fetchall()
     return children
