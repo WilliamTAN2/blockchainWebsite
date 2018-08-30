@@ -37,8 +37,8 @@ def get_timestamp(transactionid):
 def get_children_with_pq(transactionid, delai, source_timestamp):
     timestamp = get_timestamp(transactionid) + int(delai)
     children = []
-    query = ("SELECT timestamp - '" + str(source_timestamp) + "', transaction, previoustransaction"
-             "FROM transactions"
+    query = ("SELECT timestamp - " + str(source_timestamp) + ", transaction, previoustransaction "
+             "FROM transactions "
              "WHERE previoustransaction LIKE  '%" + transactionid +
              "%' and timestamp<" + str(timestamp))
     print(query)
