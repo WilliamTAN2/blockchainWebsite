@@ -4,7 +4,7 @@ import subprocess
 import re
 import json
 
-BITCOIND_PATH = '/home/wtan/bitcoin-0.16.0'
+BITCOIND_PATH = '/home/abrochec/bitcoin-0.16.1'
 
 #function used to ask the user for the block height///////////////
 def askheight():
