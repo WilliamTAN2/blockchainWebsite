@@ -8,7 +8,7 @@ from blog.models import Article
 from .forms import ContactForm, ArticleForm, ScriptInputsOutputsForm, TestUrlForm, ScriptRecentTransactionForm
 
 import sys
-sys.path.insert(0, '/home/abrochec/blockchain/blockchainWebsite/scripts')
+sys.path.insert(0, '/home/wtan/blockchainWebsite/scripts')
 import inputs_outputs, recent_transaction, exploring_graph
 
 def askheight(request):
