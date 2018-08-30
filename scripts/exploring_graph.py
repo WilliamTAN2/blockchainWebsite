@@ -127,7 +127,7 @@ def build_best_path(g, child_node):
 def test():
     g = Graph()
     g_v = GlobalVariable()
-    explore_graph(g, g_v, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(1))
+    explore_graph(g, g_v, 'b5f6e3b217fa7f6d58081b5d2a9a6607eebd889ed2c470191b2a45e0dcb98eb0', 1, days_to_seconds(0.5))
     return g.nodes_list, build_best_path(g, g_v.best_node)
 
 def test_forward():
